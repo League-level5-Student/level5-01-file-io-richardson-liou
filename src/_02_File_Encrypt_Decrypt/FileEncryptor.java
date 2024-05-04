@@ -20,4 +20,32 @@ public class FileEncryptor {
 	 * Create a program that takes a message and a key from the user.
 	 * Use the key to shift each letter in the users input and save the final result to a file.
 	 */
+	
+	public static String encrypt (String message, int key) {
+		StringBuilder encryptedMessage = new StringBuilder();
+		char encryptedCh;
+        for (int i = 0; i < message.length(); i++) {
+            char current = message.charAt(i);
+            	if(Character.isLetter(current)) {
+            		if(current+key > 26) {
+            			encryptedCh = (char) (current -(26+key));
+            		}
+            		else {
+            			encryptedCh = (char) (current + key);
+            		}
+            		encryptedMessage.append(encryptedCh);
+            	}
+
+
+            }
+        return encryptedMessage.toString();
+	}
+	
+	
+public static void main(String[] args) {
+	System.out.println(encrypt("Hello",4));
 }
+}
+
+
+

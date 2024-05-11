@@ -1,5 +1,8 @@
 package _02_File_Encrypt_Decrypt;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class FileEncryptor {
 	/*
 	 * Encryption is the process of encoding a message or information
@@ -26,24 +29,50 @@ public class FileEncryptor {
 		char encryptedCh;
         for (int i = 0; i < message.length(); i++) {
             char current = message.charAt(i);
+            if(Character.isSpace(current)) {
+            	encryptedMessage.append(current);
+            }
             	if(Character.isLetter(current)) {
-            		if(current+key > 26) {
-            			encryptedCh = (char) (current -(26+key));
+            		int x = current;
+            		System.out.println(current + " "+ x);
+            		if (Character.isUpperCase(current)) {
+            			if(current+key>90) {
+            			encryptedCh = (char) (current+key-26);
+            			}
+            			else {
+            				encryptedCh = (char) (current+key);
+            			}
             		}
             		else {
-            			encryptedCh = (char) (current + key);
+            			if(current+key > 120) {
+            				encryptedCh = (char) (current+key-26);
+            			}
+            			else {
+            				encryptedCh = (char) (current + key);
+            			}
             		}
+            		
             		encryptedMessage.append(encryptedCh);
             	}
 
 
             }
+        try {
+			FileWriter fw = new FileWriter("src/_02_File_Encrypt_Decrypt/test.txt");
+
+			
+			fw.write(encryptedMessage.toString());
+				
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         return encryptedMessage.toString();
 	}
 	
 	
 public static void main(String[] args) {
-	System.out.println(encrypt("Hello",4));
+	System.out.println(encrypt("Hello World",4));
 }
 }
 

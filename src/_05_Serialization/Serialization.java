@@ -29,7 +29,7 @@ public class Serialization {
 	public void test() {
 		// Construct a MinecraftCreeper object and save it to a file
 		save(new MinecraftCreeper("Bonnie", 100, 250, 0));
-
+		
 		// Load the MinecraftCreeper object from the file
 		MinecraftCreeper creeper = load();
 

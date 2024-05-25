@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -95,22 +96,26 @@ public class ToDoList implements ActionListener {
 		}
 		
 		else if (e.getSource() == saveList) {
-			 try (FileWriter bw = new FileWriter(FILENAME)) {
-		            for (String task : tasks) {
-		                bw.write(task);
-		                bw.close();
-		            }
-		        } catch (IOException ex) {
-		            JOptionPane.showMessageDialog(null, "Error saving tasks to file.");
-		        }
+			for (int i = 0; i < tasks.size(); i++) {
+				try {
+					FileWriter fr = new FileWriter("src/_03_To_Do_List/List.txt");
+					
+					fr.write(tasks.get(i));
+					fr.close();
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
         }
 		
 		else if (e.getSource() == loadList) {
-			try(FileWriter fw = new FileWriter(FILENAME)){
-				
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			JFileChooser jfc = new JFileChooser();
+			int returnVal = jfc.showOpenDialog(null);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				String fileName = jfc.getSelectedFile().getAbsolutePath();
+				System.out.println(fileName);
 			}
 		}
 }
